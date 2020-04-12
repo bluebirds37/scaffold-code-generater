@@ -1,0 +1,38 @@
+server:
+  port: 30000
+spring:
+  # 禁用spring mvc freemarker扫描
+  freemarker:
+    check-template-location: false
+  datasource:
+    url: jdbc:mysql://192.168.176.128:3306/scaffold?serverTimezone=Hongkong&useSSL=false&useUnicode=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true
+    hikari:
+      username: root
+      password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**
+
+logging:
+  file:
+    path: ./code.log
+    max-size: 100MB
+  level:
+    root: info
+top:
+  bluebirds37:
+    result-path: C:\migao\CodeSpaces\scaffold-code-generator\result
+    table-names:
+    template-names:
+      - Controller
+      - Mapper
+      - MapperXml
+      - MBPo
+      - Repository
+      - Req
+      - Res
+      - Service
+      - ServiceImpl
+    package-name: cn.jiheng
+    table-prefix: T_
+
