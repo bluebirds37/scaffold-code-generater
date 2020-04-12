@@ -28,10 +28,14 @@ public class TableInfo {
 
     private String humpTableName;
 
+    private String className;
+
     /**
      * 注释
      */
     private String tableComment;
+
+    private String primaryJavaType;
 
     private List<ColumnInfo> columnInfoList = new ArrayList<>();
 

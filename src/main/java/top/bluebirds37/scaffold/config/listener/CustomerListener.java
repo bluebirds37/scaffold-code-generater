@@ -41,6 +41,7 @@ public class CustomerListener implements ApplicationListener<ContextRefreshedEve
         tableInfos.forEach(
                 table -> {
                     table.setHumpTableName(JdbcNameUtils.getHumpString(table.getTableName(), systemProperties.getTablePrefix()));
+                    table.setClassName(JdbcNameUtils.getClassName(table.getTableName(), systemProperties.getTablePrefix()));
                     List<ColumnInfo> columnInfoList = table.getColumnInfoList();
                     columnInfoList.forEach(
                             column -> {
@@ -49,6 +50,11 @@ public class CustomerListener implements ApplicationListener<ContextRefreshedEve
                             }
                     );
                     table.setPackageName(systemProperties.getPackageName());
+                    table.getColumnInfoList().stream().filter(i -> i.getPrimary() != null && i.getPrimary()).findAny().ifPresent(
+                            i -> table.setPrimaryJavaType(
+                                    i.getJavaType()
+                            )
+                    );
                     log.info("系统配置:{}", JSONObject.toJSONString(table));
                 }
         );
@@ -65,6 +71,7 @@ public class CustomerListener implements ApplicationListener<ContextRefreshedEve
                                                 File.separator,
                                                 templateName,
                                                 File.separator,
+                                                table.getClassName(),
                                                 templateName,
                                                 ".java"
                                         ),
@@ -74,6 +81,5 @@ public class CustomerListener implements ApplicationListener<ContextRefreshedEve
                     );
                 }
         );
-
     }
 }

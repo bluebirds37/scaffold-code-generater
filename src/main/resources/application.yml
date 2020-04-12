@@ -5,7 +5,7 @@ spring:
   freemarker:
     check-template-location: false
   datasource:
-    url: jdbc:mysql://192.168.176.128:3306/scaffold?serverTimezone=Hongkong&useSSL=false&useUnicode=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true
+    url: jdbc:mysql://192.168.192.130:3306/ypd?serverTimezone=Hongkong&useSSL=false&useUnicode=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true
     hikari:
       username: root
       password: root
@@ -21,18 +21,20 @@ logging:
     root: info
 top:
   bluebirds37:
-    result-path: C:\migao\CodeSpaces\scaffold-code-generator\result
-    table-names:
+    result-path: E:\CodeSpaces\WorkSpaces\migao\ypd\scaffold-code-generater\result
+    table-names: t_log_history
     template-names:
       - Controller
       - Mapper
       - MapperXml
       - MBPo
       - Repository
-      - Req
+      - InsertReq
+      - UpdateReq
       - Res
       - Service
       - ServiceImpl
     package-name: cn.jiheng
-    table-prefix: T_
+    table-prefix: t_
+
 

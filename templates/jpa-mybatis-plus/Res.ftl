@@ -16,26 +16,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Data
-public class PermissionQueryRes {
+public class ${humpTableName!?cap_first}QueryRes {
 
-    private Long id;
-
-    private String name;
-
-    private String url;
-
-    private Long typeId;
-
-    private String description;
-
-    private Long parentId;
-
-    private LocalDateTime updateTime;
-
-    private LocalDateTime deleteTime;
-
-    private LocalDateTime createTime;
-
-    private Integer deleted;
+<#list columnInfoList as columnInfo>
+    @ApiModelProperty(value = "${columnInfo.columnComment!}")
+    private ${columnInfo.javaType!} ${columnInfo.olumnName!};
+</#list>
 
 }

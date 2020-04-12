@@ -31,7 +31,7 @@ public class JdbcNameUtils {
             if (i != 0) {
                 //大写首位
                 if (word.length() > 0) {
-                    String first = word.substring(0, 1).toLowerCase();
+                    String first = word.substring(0, 1).toUpperCase();
                     String other = word.substring(1);
                     word = StringUtils.join(first, other);
                 }
@@ -39,5 +39,35 @@ public class JdbcNameUtils {
             humpString = StringUtils.join(humpString, word);
         }
         return humpString;
+    }
+
+    /**
+     * 数据库 _ 转驼峰
+     *
+     * @param jdbcString jdbcString
+     * @return string
+     */
+    public static String getClassName(String jdbcString, String tablePrefix) {
+        String className = "";
+        if (StringUtils.isNotBlank(tablePrefix)) {
+            jdbcString = jdbcString.replaceAll(tablePrefix, "");
+        }
+        String[] split = jdbcString.split("_");
+        for (int i = 0; i < split.length; i++) {
+            String word = split[i];
+            if (word.length() < 1) {
+                continue;
+            }
+            //转小写
+            word = word.toLowerCase();
+            //大写首位
+            if (word.length() > 0) {
+                String first = word.substring(0, 1).toUpperCase();
+                String other = word.substring(1);
+                word = StringUtils.join(first, other);
+            }
+            className = StringUtils.join(className, word);
+        }
+        return className;
     }
 }

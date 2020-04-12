@@ -11,6 +11,6 @@ import java.util.List;
  * @Date 2020/4/10 11:00
  */
 
-public interface PermissionMapper extends Mapper<MBPermission> {
+public interface ${humpTableName!?cap_first}Mapper extends Mapper<${humpTableName!?cap_first}> {
 
 }

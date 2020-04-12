@@ -1,10 +1,12 @@
 package cn.jiheng.ypd.entity.vo.req.system;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 /**
@@ -16,26 +18,17 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Data
-public class PermissionQueryReq {
+public class ${humpTableName!?cap_first}InsertReq {
 
-    private Long id;
-
-    private String name;
-
-    private String url;
-
-    private Long typeId;
-
-    private String description;
-
-    private Long parentId;
-
-    private LocalDateTime updateTime;
-
-    private LocalDateTime deleteTime;
-
-    private LocalDateTime createTime;
-
-    private Integer deleted;
+    <#list columnInfoList as columnInfo>
+        @ApiModelProperty(value = "${columnInfo.columnComment!}")
+        <#if columnInfo.javaType =="String">
+            @NotEmpty(message = "${columnInfo.columnComment!}不能为空")
+        </#if>
+        <#if columnInfo.javaType !="String">
+            @NotNull(message = "${columnInfo.columnComment!}不能为空")
+        </#if>
+        private ${columnInfo.javaType!} ${columnInfo.olumnName!};
+    </#list>
 
 }

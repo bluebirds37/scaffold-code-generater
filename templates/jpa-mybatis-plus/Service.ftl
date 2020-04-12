@@ -10,15 +10,15 @@ import cn.jiheng.ypd.entity.vo.res.system.PermissionQueryRes;
 
 import java.util.List;
 
-public interface PermissionService {
+public interface ${humpTableName!?cap_first}Service {
 
     /**
      * 增
      *
-     * @param permissionInsertReq permissionInsertReq
+     * @param ${humpTableName!}InsertReq ${humpTableName!}InsertReq
      * @return ?
      */
-    ResponseBean<?> insert(PermissionInsertReq permissionInsertReq);
+    ResponseBean<?> insert(${humpTableName!?cap_first}InsertReq ${humpTableName!}InsertReq);
 
     /**
      * 分页查
@@ -26,7 +26,7 @@ public interface PermissionService {
      * @param permissionPageQueryReq permissionPageQueryReq
      * @return permissionQueryRes
      */
-    ResponseBean<PageBean<PermissionQueryRes>> pageQuery(PermissionPageQueryReq permissionPageQueryReq);
+    ResponseBean<PageBean<${humpTableName!?cap_first}QueryRes>> pageQuery(${humpTableName!?cap_first}PageQueryReq ${humpTableName!}PageQueryReq);
 
     /**
      * 删
@@ -34,7 +34,7 @@ public interface PermissionService {
      * @param id id
      * @return ?
      */
-    ResponseBean<?> deleteById(Long id);
+    ResponseBean<?> deleteById(${primaryJavaType!} id);
 
     /**
      * 批量删
@@ -42,15 +42,15 @@ public interface PermissionService {
      * @param ids ids
      * @return ?
      */
-    ResponseBean<?> deleteBatch(List<Long> ids);
+    ResponseBean<?> deleteBatch(List<${primaryJavaType!}> ids);
 
     /**
      * 改
      *
-     * @param permissionUpdateReq permissionUpdateReq
+     * @param ${humpTableName!}UpdateReq ${humpTableName!}UpdateReq
      * @return ?
      */
-    ResponseBean<?> update(PermissionUpdateReq permissionUpdateReq);
+    ResponseBean<?> update(${humpTableName!?cap_first}UpdateReq ${humpTableName!}UpdateReq);
 
     /**
      * 查
@@ -58,5 +58,5 @@ public interface PermissionService {
      * @param permissionQueryReq
      * @return ?
      */
-    ResponseBean<List<PermissionQueryRes>> query(PermissionQueryReq permissionQueryReq);
+    ResponseBean<List<${humpTableName!?cap_first}QueryRes>> query(${humpTableName!?cap_first}QueryReq ${humpTableName!}QueryReq);
 }
