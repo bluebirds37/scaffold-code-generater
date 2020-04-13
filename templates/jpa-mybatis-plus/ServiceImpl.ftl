@@ -1,18 +1,18 @@
-package cn.jiheng.ypd.service.impl;
+package ${packageName!}.service.impl;
 
-import cn.jiheng.ypd.config.response.PageBean;
-import cn.jiheng.ypd.config.response.ResponseBean;
-import cn.jiheng.ypd.config.response.ResponseBuilder;
-import cn.jiheng.ypd.entity.po.system.Permission;
-import cn.jiheng.ypd.entity.vo.req.system.PermissionInsertReq;
-import cn.jiheng.ypd.entity.vo.req.system.PermissionPageQueryReq;
-import cn.jiheng.ypd.entity.vo.req.system.PermissionQueryReq;
-import cn.jiheng.ypd.entity.vo.req.system.PermissionUpdateReq;
-import cn.jiheng.ypd.entity.vo.res.system.PermissionQueryRes;
-import cn.jiheng.ypd.mapper.PermissionMapper;
-import cn.jiheng.ypd.repository.PermissionRepository;
-import cn.jiheng.ypd.service.PermissionService;
-import cn.jiheng.ypd.util.EntityUtils;
+import ${packageName!}.config.response.PageBean;
+import ${packageName!}.config.response.ResponseBean;
+import ${packageName!}.config.response.ResponseBuilder;
+import ${packageName!}.entity.po.system.Permission;
+import ${packageName!}.entity.vo.req.system.PermissionInsertReq;
+import ${packageName!}.entity.vo.req.system.PermissionPageQueryReq;
+import ${packageName!}.entity.vo.req.system.PermissionQueryReq;
+import ${packageName!}.entity.vo.req.system.PermissionUpdateReq;
+import ${packageName!}.entity.vo.res.system.PermissionQueryRes;
+import ${packageName!}.mapper.PermissionMapper;
+import ${packageName!}.repository.PermissionRepository;
+import ${packageName!}.service.PermissionService;
+import ${packageName!}.util.EntityUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,148 +28,172 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional(rollbackFor = {Exception.class})
-public class PermissionServiceImpl implements PermissionService {
+public class ${className!}ServiceImpl implements ${className!}Service {
 
     @Resource
-    private PermissionRepository permissionRepository;
+    private ${className!}Repository ${humpTableName!}Repository;
 
     @Resource
-    private PermissionMapper permissionMapper;
+    private  ${className!}Mapper ${humpTableName!}Mapper;
 
 
     /**
      * 增
      *
-     * @param permissionInsertReq permissionInsertReq
+     * @param ${humpTableName!}InsertReq ${humpTableName!}InsertReq
      * @return ?
      */
     @Override
-    public ResponseBean<?> insert(PermissionInsertReq permissionInsertReq) {
-        return ResponseBuilder.ok(permissionRepository.save(EntityUtils.copyProperties(permissionInsertReq, Permission.class)));
+    public ResponseBean<?> insert(${className!}InsertReq ${humpTableName!}InsertReq) {
+        return ResponseBuilder.ok(${humpTableName!}Repository.save(EntityUtils.copyProperties(${humpTableName!}InsertReq, ${className!}.class)));
     }
 
     /**
      * 分页查
      *
-     * @param permissionPageQueryReq permissionPageQueryReq
+     * @param ${humpTableName!}PageQueryReq ${humpTableName!}PageQueryReq
      * @return ?
      */
     @Override
-    public ResponseBean<PageBean<PermissionQueryRes>> pageQuery(PermissionPageQueryReq permissionPageQueryReq) {
+    public ResponseBean<PageBean<${className!}QueryRes>> pageQuery(${className!}PageQueryReq ${humpTableName!}PageQueryReq) {
         //1。分页查询所有供公司
-        Integer page = permissionPageQueryReq.getPage();
+        Integer page = ${humpTableName!}PageQueryReq.getPage();
         page = page == null ? 1 : page <= 0 ? 1 : page;
-        Integer size = permissionPageQueryReq.getSize();
+        Integer size = ${humpTableName!}PageQueryReq.getSize();
         size = size == null ? 10 : size <= 0 ? 10 : size;
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        Specification<Permission> permissionSpecification = (root, criteriaQuery, criteriaBuilder) -> {
+        Specification<${className!}> ${humpTableName!}Specification = (root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> predicateList = new ArrayList<>();
-            if (StringUtils.isNotBlank(permissionPageQueryReq.getName())) {
-                Predicate like = criteriaBuilder.like(root.get("name").as(String.class), StringUtils.join(
-                        "%", permissionPageQueryReq.getName(), "%"
-                ));
-                predicateList.add(like);
-            }
+            <#list columnInfoList as columnInfo>
+                <#if columnInfo.javaType == "String" >
+                    if (StringUtils.isNotBlank(${humpTableName!}PageQueryReq.get${columnInfo.humpColumnName!?cap_first}())) {
+                        Predicate like = criteriaBuilder.like(root.get("${columnInfo.humpColumnName!}").as(${columnInfo.javaType!}.class),
+                        StringUtils.join(
+                        "%", ${humpTableName!}PageQueryReq.get${columnInfo.humpColumnName!?cap_first}(), "%"
+                        ));
+                        predicateList.add(like);
+                    }
+                </#if>
+                <#if columnInfo.javaType != "String" >
+                    if (${humpTableName!}PageQueryReq.get${columnInfo.humpColumnName!?cap_first}()!=null) {
+                    Predicate equal = criteriaBuilder.equal(root.get("${columnInfo.humpColumnName!}").as(${columnInfo.javaType!}.class),
+                    ${humpTableName!}PageQueryReq.get${columnInfo.humpColumnName!?cap_first}()
+                    );
+                    predicateList.add(equal);
+                    }
+                </#if>
+            </#list>
+            criteriaBuilder.equal(root.get("deleted").as(Integer.class),1);
             Predicate[] predicateArray = new Predicate[predicateList.size()];
             criteriaQuery.where(criteriaBuilder.and(predicateList.toArray(predicateArray)));
             return criteriaQuery.getRestriction();
         };
-        Page<Permission> all = permissionRepository.findAll(permissionSpecification, pageRequest);
+        Page<${className!}> all = ${humpTableName!}Repository.findAll(${humpTableName!}Specification, pageRequest);
         return ResponseBuilder.ok(
                 all,
                 element -> {
-                    PermissionQueryRes permissionQueryRes = PermissionQueryRes
+                    ${className!}QueryRes ${humpTableName!}QueryRes = ${className!}QueryRes
                             .builder()
-                            .id(element.getId())
-                            .name(element.getName())
-                            .createTime(element.getCreateTime())
-                            .deleted(element.getDeleted())
-                            .deleteTime(element.getDeleteTime())
-                            .description(element.getDescription())
-                            .updateTime(element.getUpdateTime())
-                            .url(element.getUrl())
+                            <#list columnInfoList as columnInfo>
+                            .${columnInfo.humpColumnName!}(element.get${columnInfo.humpColumnName!?cap_first}())
+                            </#list>
                             .build();
-                    return permissionQueryRes;
+                    return ${humpTableName!}QueryRes;
                 }
         );
     }
 
     /**
-     * 删
-     *
-     * @param id id
-     * @return ?
-     */
+    * 删
+    *
+    * @param id id
+    * @return ?
+    */
     @Override
     public ResponseBean<?> deleteById(Long id) {
-        permissionRepository.deleteById(id);
-        return ResponseBuilder.ok();
-    }
-
-    /**
-     * 批量删
-     *
-     * @param ids ids
-     * @return ?
-     */
-    @Override
-    public ResponseBean<?> deleteBatch(List<Long> ids) {
-        ids.forEach(
-                i -> permissionRepository.deleteById(i)
+        ${humpTableName!}Repository.findById(id).ifPresent(
+            i -> {
+                i.setDeleted(1);
+        ${humpTableName!}Repository.save(i);
+            }
         );
         return ResponseBuilder.ok();
     }
 
     /**
+    * 批量删
+    *
+    * @param ids ids
+    * @return ?
+    */
+    @Override
+    public ResponseBean<?> deleteBatch(List<Long> ids) {
+            ${humpTableName!}Repository.findAllById(ids).forEach(
+            i -> {
+                i.setDeleted(1);
+            ${humpTableName!}Repository.save(i);
+            }
+        );
+        return ResponseBuilder.ok();
+    }
+    /**
      * 改
      *
-     * @param permissionUpdateReq permissionUpdateReq
+     * @param ${humpTableName!}UpdateReq ${humpTableName!}UpdateReq
      * @return ?
      */
     @Override
-    public ResponseBean<?> update(PermissionUpdateReq permissionUpdateReq) {
-        permissionRepository.save(EntityUtils.copyProperties(permissionUpdateReq, Permission.class));
+    public ResponseBean<?> update(${className!}UpdateReq ${humpTableName!}UpdateReq) {
+            ${humpTableName!}Repository.save(EntityUtils.copyProperties(${humpTableName!}UpdateReq, ${className!}.class));
         return ResponseBuilder.ok();
     }
 
     /**
      * 查
      *
-     * @param permissionQueryReq permissionQueryReq
+     * @param ${humpTableName!}QueryReq ${humpTableName!}QueryReq
      * @return ?
      */
     @Override
-    public ResponseBean<List<PermissionQueryRes>> query(PermissionQueryReq permissionQueryReq) {
+    public ResponseBean<List<${className!}QueryRes>> query(${className!}QueryReq ${humpTableName!}QueryReq) {
         //1。分页查询所有供公司
-        Specification<Permission> permissionSpecification = (root, criteriaQuery, criteriaBuilder) -> {
-            List<Predicate> predicateList = new ArrayList<>();
-            if (StringUtils.isNotBlank(permissionQueryReq.getName())) {
-                Predicate like = criteriaBuilder.like(root.get("name").as(String.class), StringUtils.join(
-                        "%", permissionQueryReq.getName(), "%"
-                ));
-                predicateList.add(like);
-            }
+        Specification<${className!}> ${humpTableName!}Specification = (root, criteriaQuery, criteriaBuilder) -> {
+        List<Predicate> predicateList = new ArrayList<>();
+            <#list columnInfoList as columnInfo>
+                <#if columnInfo.javaType == "String" >
+                    if (StringUtils.isNotBlank(${humpTableName!}PageQueryReq.get${columnInfo.humpColumnName!?cap_first}())) {
+                    Predicate like = criteriaBuilder.like(root.get("${columnInfo.humpColumnName!}").as(${columnInfo.javaType!}.class),
+                    StringUtils.join(
+                    "%", ${humpTableName!}PageQueryReq.get${columnInfo.humpColumnName!?cap_first}(), "%"
+                    ));
+                    predicateList.add(like);
+                    }
+                </#if>
+                <#if columnInfo.javaType != "String" >
+                    if (${humpTableName!}PageQueryReq.get${columnInfo.humpColumnName!?cap_first}()!=null) {
+                    Predicate equal = criteriaBuilder.equal(root.get("${columnInfo.humpColumnName!}").as(${columnInfo.javaType!}.class),
+                    ${humpTableName!}PageQueryReq.get${columnInfo.humpColumnName!?cap_first}()
+                    );
+                    predicateList.add(equal);
+                    }
+                </#if>
+            </#list>
+            criteriaBuilder.equal(root.get("deleted").as(Integer.class),1);
             Predicate[] predicateArray = new Predicate[predicateList.size()];
             criteriaQuery.where(criteriaBuilder.and(predicateList.toArray(predicateArray)));
             return criteriaQuery.getRestriction();
         };
-        List<Permission> all = permissionRepository.findAll(permissionSpecification);
+        List<${className!}> all = ${humpTableName!}Repository.findAll(${humpTableName!}Specification);
         return ResponseBuilder.ok(
                 all.stream().map(
                         element -> {
-                            //完善数据组装
-                            PermissionQueryRes permissionQueryRes = PermissionQueryRes
-                                    .builder()
-                                    .id(element.getId())
-                                    .name(element.getName())
-                                    .createTime(element.getCreateTime())
-                                    .deleted(element.getDeleted())
-                                    .deleteTime(element.getDeleteTime())
-                                    .description(element.getDescription())
-                                    .updateTime(element.getUpdateTime())
-                                    .url(element.getUrl())
-                                    .build();
-                            return permissionQueryRes;
+                        ${className!}QueryRes ${humpTableName!}QueryRes = ${className!}QueryRes
+                        .builder()
+                        <#list columnInfoList as columnInfo>
+                            .${columnInfo.humpColumnName!}(element.get${columnInfo.humpColumnName!?cap_first}())
+                        </#list>
+                        .build();
+                        return ${humpTableName!}QueryRes;
                         }
                 ).collect(Collectors.toList())
         );

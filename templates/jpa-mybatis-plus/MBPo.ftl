@@ -1,8 +1,8 @@
-package cn.jiheng.ypd.entity.po.mybatis;
+package ${packageName!}.entity.po.mybatis;
 
-import cn.jiheng.ypd.entity.po.system.Dictionary;
-import cn.jiheng.ypd.entity.po.system.Permission;
-import cn.jiheng.ypd.entity.po.system.Role;
+import ${packageName!}.entity.po.system.Dictionary;
+import ${packageName!}.entity.po.system.Permission;
+import ${packageName!}.entity.po.system.Role;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -25,28 +25,17 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Data
-@TableName("t_permission")
-public class MBPermission {
+@TableName("${tableName!}")
+public class MB${className!} {
 
-    @TableId
-    private Long id;
-
-    private String name;
-
-    private String url;
-
-    private Long typeId;
-
-    private String description;
-
-    private Long parentId;
-
-    private LocalDateTime updateTime;
-
-    private LocalDateTime deleteTime;
-
-    private LocalDateTime createTime;
-
-    private Integer deleted;
+<#list columnInfoList as columnInfo>
+    /**
+    * ${columnInfo.columnComment!}
+    */
+    <#if columnInfo.primary == true >
+        @TableId
+    </#if>
+    private ${columnInfo.javaType!} ${columnInfo.olumnName!};
+</#list>
 
 }

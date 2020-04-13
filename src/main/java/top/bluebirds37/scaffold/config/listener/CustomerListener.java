@@ -46,7 +46,7 @@ public class CustomerListener implements ApplicationListener<ContextRefreshedEve
                     columnInfoList.forEach(
                             column -> {
                                 column.setHumpColumnName(JdbcNameUtils.getHumpString(column.getColumnName(), ""));
-                                column.setJavaType(DataTypeEnum.DataTypeEnumTool.getJavaTypeByJdbcType(column.getDataType()));
+                                column.setJavaType(DataTypeEnum.DataTypeEnumTool.getJavaTypeByJdbcType(column.getDataType().toUpperCase()));
                             }
                     );
                     table.setPackageName(systemProperties.getPackageName());
@@ -64,7 +64,7 @@ public class CustomerListener implements ApplicationListener<ContextRefreshedEve
                     systemProperties.getTemplateNames().forEach(
                             templateName -> {
                                 TemplateHandler.getTemplate(
-                                        "jpa-mybatis-plus",
+                                        systemProperties.getTemplateType(),
                                         templateName,
                                         StringUtils.join(
                                                 systemProperties.getResultPath(),

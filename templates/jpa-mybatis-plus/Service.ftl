@@ -1,12 +1,12 @@
-package cn.jiheng.ypd.service;
+package ${packageName!}.service;
 
-import cn.jiheng.ypd.config.response.PageBean;
-import cn.jiheng.ypd.config.response.ResponseBean;
-import cn.jiheng.ypd.entity.vo.req.system.PermissionInsertReq;
-import cn.jiheng.ypd.entity.vo.req.system.PermissionPageQueryReq;
-import cn.jiheng.ypd.entity.vo.req.system.PermissionQueryReq;
-import cn.jiheng.ypd.entity.vo.req.system.PermissionUpdateReq;
-import cn.jiheng.ypd.entity.vo.res.system.PermissionQueryRes;
+import ${packageName!}.config.response.PageBean;
+import ${packageName!}.config.response.ResponseBean;
+import ${packageName!}.entity.vo.req.system.PermissionInsertReq;
+import ${packageName!}.entity.vo.req.system.PermissionPageQueryReq;
+import ${packageName!}.entity.vo.req.system.PermissionQueryReq;
+import ${packageName!}.entity.vo.req.system.PermissionUpdateReq;
+import ${packageName!}.entity.vo.res.system.PermissionQueryRes;
 
 import java.util.List;
 

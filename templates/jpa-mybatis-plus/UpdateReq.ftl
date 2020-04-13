@@ -1,4 +1,4 @@
-package cn.jiheng.ypd.entity.vo.req.system;
+package ${packageName!}.entity.vo.req.system;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -26,8 +26,6 @@ import java.util.UUID;
 public class TemplateHandler {
 
     private static Configuration cfg = new Configuration(Configuration.VERSION_2_3_29);
-    private static final String FTL_LOCATION = "classpath:/templates/";
-
     static {
         cfg.setDefaultEncoding("UTF-8");
     }
@@ -47,7 +45,7 @@ public class TemplateHandler {
                     "templates",
                     File.separator,
                     templateType,
-                    "/"
+                    File.separator
             ));
             cfg.setDirectoryForTemplateLoading(ftlDir);
             Template template = cfg.getTemplate(StringUtils.join(templateName, ".ftl"));

@@ -28,6 +28,8 @@ public class SystemProperties {
      */
     private List<String> tableNames;
 
+    private String templateType;
+
     private String resultPath;
 
     private List<String> templateNames;

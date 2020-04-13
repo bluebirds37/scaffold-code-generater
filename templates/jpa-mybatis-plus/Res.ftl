@@ -1,4 +1,4 @@
-package cn.jiheng.ypd.entity.vo.res.system;
+package ${packageName!}.entity.vo.res.system;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

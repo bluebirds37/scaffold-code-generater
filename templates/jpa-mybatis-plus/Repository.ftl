@@ -1,6 +1,6 @@
-package cn.jiheng.ypd.repository;
+package ${packageName!}.repository;
 
-import cn.jiheng.ypd.entity.po.system.Permission;
+import ${packageName!}.entity.po.system.${className!};
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

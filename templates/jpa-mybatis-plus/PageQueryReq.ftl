@@ -1,9 +1,7 @@
 package ${packageName!}.entity.vo.req.system;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import ${packageName!}.config.request.BasePageRequest;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -14,9 +12,8 @@ import java.time.LocalDateTime;
  */
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Data
-public class ${humpTableName!?cap_first}QueryReq {
+public class ${className!}PageQueryReq extends BasePageRequest {
 
 <#list columnInfoList as columnInfo>
     @ApiModelProperty(value = "${columnInfo.columnComment!}")

@@ -1,6 +1,6 @@
-package cn.jiheng.ypd.mapper;
+package ${packageName!}.mapper;
 
-import cn.jiheng.ypd.entity.po.mybatis.MBPermission;
+import ${packageName!}.entity.po.mybatis.MB${className!};
 import com.baomidou.mybatisplus.core.mapper.Mapper;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package cn.jiheng.ypd.entity.vo.req.system;
+package ${packageName!}.entity.vo.req.system;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
