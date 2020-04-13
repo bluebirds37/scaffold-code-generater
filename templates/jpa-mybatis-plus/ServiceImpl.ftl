@@ -83,7 +83,7 @@ public class ${className!}ServiceImpl implements ${className!}Service {
                     }
                 </#if>
             </#list>
-            criteriaBuilder.equal(root.get("deleted").as(Integer.class),1);
+            criteriaBuilder.equal(root.get("deleted").as(Integer.class),0);
             Predicate[] predicateArray = new Predicate[predicateList.size()];
             criteriaQuery.where(criteriaBuilder.and(predicateList.toArray(predicateArray)));
             return criteriaQuery.getRestriction();
@@ -178,7 +178,7 @@ public class ${className!}ServiceImpl implements ${className!}Service {
                     }
                 </#if>
             </#list>
-            criteriaBuilder.equal(root.get("deleted").as(Integer.class),1);
+            criteriaBuilder.equal(root.get("deleted").as(Integer.class),0);
             Predicate[] predicateArray = new Predicate[predicateList.size()];
             criteriaQuery.where(criteriaBuilder.and(predicateList.toArray(predicateArray)));
             return criteriaQuery.getRestriction();
