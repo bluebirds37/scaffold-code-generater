@@ -63,17 +63,23 @@ public class CustomerListener implements ApplicationListener<ContextRefreshedEve
                 table -> {
                     systemProperties.getTemplateNames().forEach(
                             templateName -> {
+                                String suffix = ".java";
+                                String resultName = templateName;
+                                if (templateName.contains("Xml")){
+                                    suffix = ".xml";
+                                    resultName  = resultName.replaceAll("Xml","");
+                                }
                                 TemplateHandler.getTemplate(
                                         systemProperties.getTemplateType(),
                                         templateName,
                                         StringUtils.join(
                                                 systemProperties.getResultPath(),
                                                 File.separator,
-                                                templateName,
-                                                File.separator,
+                                                //templateName,
+                                                //File.separator,
                                                 table.getClassName(),
-                                                templateName,
-                                                ".java"
+                                                resultName,
+                                                suffix
                                         ),
                                         JSONObject.parseObject(JSON.toJSONString(table))
                                 );

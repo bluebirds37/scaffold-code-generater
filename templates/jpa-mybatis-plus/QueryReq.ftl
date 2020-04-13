@@ -20,7 +20,7 @@ public class ${humpTableName!?cap_first}QueryReq {
 
 <#list columnInfoList as columnInfo>
     @ApiModelProperty(value = "${columnInfo.columnComment!}")
-    private ${columnInfo.javaType!} ${columnInfo.olumnName!};
+    private ${columnInfo.javaType!} ${columnInfo.humpColumnName!};
 </#list>
 
 }

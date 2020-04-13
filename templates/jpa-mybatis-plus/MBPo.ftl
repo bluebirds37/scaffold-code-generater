@@ -35,7 +35,7 @@ public class MB${className!} {
     <#if columnInfo.primary == true >
         @TableId
     </#if>
-    private ${columnInfo.javaType!} ${columnInfo.olumnName!};
+    private ${columnInfo.javaType!} ${columnInfo.humpColumnName!};
 </#list>
 
 }

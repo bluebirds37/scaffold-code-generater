@@ -26,7 +26,7 @@ public class ${humpTableName!?cap_first}UpdateReq {
     <#if columnInfo.javaType !="String">
         @NotNull(message = "${columnInfo.columnComment!}不能为空")
     </#if>
-    private ${columnInfo.javaType!} ${columnInfo.olumnName!};
+    private ${columnInfo.javaType!} ${columnInfo.humpColumnName!};
 </#list>
 
 }
