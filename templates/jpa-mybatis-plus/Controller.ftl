@@ -6,8 +6,9 @@ import ${packageName!}.config.response.ResponseBean;
 import ${packageName!}.config.validation.Insert;
 import ${packageName!}.config.validation.Update;
 import ${packageName!}.entity.vo.req.system.*;
-import ${packageName!}.entity.vo.res.system.PermissionQueryRes;
-import ${packageName!}.service.PermissionService;
+import ${packageName!}.entity.vo.res.system.${className!}QueryRes;
+import ${packageName!}.service.${className!}Service;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
@@ -28,7 +29,7 @@ public class ${humpTableName!?cap_first}Controller {
     public ResponseBean<?> insert(
             @Validated(value = {Insert.class}) @RequestBody ${humpTableName!?cap_first}InsertReq ${humpTableName!}InsertReq
     ) {
-        return permissionService.insert(${humpTableName!}InsertReq);
+        return${humpTableName!}Service.insert(${humpTableName!}InsertReq);
     }
 
 

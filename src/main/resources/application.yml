@@ -21,22 +21,29 @@ logging:
     root: info
 top:
   bluebirds37:
-    result-path: C:\migao\CodeSpaces\scaffold-code-generator\result
+    # 生成目标文件夹
+    result-path: C:\migao\CodeSpaces\scaffold-code-generator\result\
+    # 需要生成的表格
     table-names: t_log_history
+    # 需要生成的模板
     template-names:
       - Controller
       - Mapper
       - MapperXml
-      - MBPo
+      - MB
       - PageQueryReq
       - Repository
       - InsertReq
       - UpdateReq
-      - Res
+      - QueryRes
       - Service
+      - QueryReq
       - ServiceImpl
-    package-name: cn.jiheng
+    # 包名称
+    package-name: cn.jiheng.ypd
+    # 表格前缀，没有就不填写
     table-prefix: t_
+    # 生成模板类型
     template-type: jpa-mybatis-plus
 
 

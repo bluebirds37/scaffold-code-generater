@@ -2,7 +2,7 @@ package ${packageName!}.entity.vo.req.system;
 
 import ${packageName!}.config.request.BasePageRequest;
 import lombok.*;
-
+import io.swagger.annotations.ApiModelProperty;
 import java.time.LocalDateTime;
 
 /**

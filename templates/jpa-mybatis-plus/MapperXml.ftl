@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="${packageName!}.mapper.${className!}Mapper">
-    <resultMap id="Base${className!}ResultMap" type="${packageName!}.entity.po.mybatis.MB${className!}">
+    <resultMap id="Base${className!}ResultMap" type="${packageName!}.entity.po.mybatis.${className!}MB">
             <#list columnInfoList as columnInfo>
                 <#if columnInfo.primary == true >
                     <id column="${columnInfo.columnName!}" property="${columnInfo.humpColumnName!}"/>

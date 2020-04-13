@@ -26,7 +26,7 @@ import java.util.Set;
 @Builder
 @Data
 @TableName("${tableName!}")
-public class MB${className!} {
+public class ${className!}MB {
 
 <#list columnInfoList as columnInfo>
     /**

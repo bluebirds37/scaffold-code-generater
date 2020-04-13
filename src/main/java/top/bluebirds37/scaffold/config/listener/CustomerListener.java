@@ -74,7 +74,6 @@ public class CustomerListener implements ApplicationListener<ContextRefreshedEve
                                         templateName,
                                         StringUtils.join(
                                                 systemProperties.getResultPath(),
-                                                File.separator,
                                                 //templateName,
                                                 //File.separator,
                                                 table.getClassName(),

@@ -3,15 +3,15 @@ package ${packageName!}.service.impl;
 import ${packageName!}.config.response.PageBean;
 import ${packageName!}.config.response.ResponseBean;
 import ${packageName!}.config.response.ResponseBuilder;
-import ${packageName!}.entity.po.system.Permission;
-import ${packageName!}.entity.vo.req.system.PermissionInsertReq;
-import ${packageName!}.entity.vo.req.system.PermissionPageQueryReq;
-import ${packageName!}.entity.vo.req.system.PermissionQueryReq;
-import ${packageName!}.entity.vo.req.system.PermissionUpdateReq;
-import ${packageName!}.entity.vo.res.system.PermissionQueryRes;
-import ${packageName!}.mapper.PermissionMapper;
-import ${packageName!}.repository.PermissionRepository;
-import ${packageName!}.service.PermissionService;
+import ${packageName!}.entity.po.system.${className!};
+import ${packageName!}.entity.vo.req.system.${className!}InsertReq;
+import ${packageName!}.entity.vo.req.system.${className!}PageQueryReq;
+import ${packageName!}.entity.vo.req.system.${className!}QueryReq;
+import ${packageName!}.entity.vo.req.system.${className!}UpdateReq;
+import ${packageName!}.entity.vo.res.system.${className!}QueryRes;
+import ${packageName!}.mapper.${className!}Mapper;
+import ${packageName!}.repository.${className!}Repository;
+import ${packageName!}.service.${className!}Service;
 import ${packageName!}.util.EntityUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
@@ -19,7 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.time.LocalDateTime;
 import javax.annotation.Resource;
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
@@ -161,18 +161,18 @@ public class ${className!}ServiceImpl implements ${className!}Service {
         List<Predicate> predicateList = new ArrayList<>();
             <#list columnInfoList as columnInfo>
                 <#if columnInfo.javaType == "String" >
-                    if (StringUtils.isNotBlank(${humpTableName!}PageQueryReq.get${columnInfo.humpColumnName!?cap_first}())) {
+                    if (StringUtils.isNotBlank(${humpTableName!}QueryReq.get${columnInfo.humpColumnName!?cap_first}())) {
                     Predicate like = criteriaBuilder.like(root.get("${columnInfo.humpColumnName!}").as(${columnInfo.javaType!}.class),
                     StringUtils.join(
-                    "%", ${humpTableName!}PageQueryReq.get${columnInfo.humpColumnName!?cap_first}(), "%"
+                    "%", ${humpTableName!}QueryReq.get${columnInfo.humpColumnName!?cap_first}(), "%"
                     ));
                     predicateList.add(like);
                     }
                 </#if>
                 <#if columnInfo.javaType != "String" >
-                    if (${humpTableName!}PageQueryReq.get${columnInfo.humpColumnName!?cap_first}()!=null) {
+                    if (${humpTableName!}QueryReq.get${columnInfo.humpColumnName!?cap_first}()!=null) {
                     Predicate equal = criteriaBuilder.equal(root.get("${columnInfo.humpColumnName!}").as(${columnInfo.javaType!}.class),
-                    ${humpTableName!}PageQueryReq.get${columnInfo.humpColumnName!?cap_first}()
+                    ${humpTableName!}QueryReq.get${columnInfo.humpColumnName!?cap_first}()
                     );
                     predicateList.add(equal);
                     }
