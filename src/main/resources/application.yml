@@ -24,15 +24,30 @@ top:
     # 生成目标文件夹
     result-path: C:\migao\CodeSpaces\scaffold-code-generator\result\
     # 需要生成的表格
-    table-names: t_log_history
+#    table-names:
+#      - t_log_history
+#    # 需要生成的模板
+#    template-names:
+#      - Controller
+#      - Mapper
+#      - MapperXml
+#      - MB
+#      - PageQueryReq
+#      - Repository
+#      - InsertReq
+#      - UpdateReq
+#      - QueryRes
+#      - Service
+#      - QueryReq
+#      - ServiceImpl
+    table-names:
+      - t_log_history
     # 需要生成的模板
     template-names:
       - Controller
       - Mapper
       - MapperXml
-      - MB
       - PageQueryReq
-      - Repository
       - InsertReq
       - UpdateReq
       - QueryRes
@@ -44,6 +59,6 @@ top:
     # 表格前缀，没有就不填写
     table-prefix: t_
     # 生成模板类型
-    template-type: jpa-mybatis-plus
+    template-type: mybatis-plus
 
 
