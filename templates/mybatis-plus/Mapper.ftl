@@ -1,6 +1,6 @@
 package ${packageName!}.mapper;
 
-import ${packageName!}.entity.po.mybatis.${className!}MB;
+import ${packageName!}.entity.po.mybatis.${className!};
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
@@ -11,6 +11,6 @@ import java.util.List;
  * @Date 2020/4/10 11:00
  */
 
-public interface ${humpTableName!?cap_first}Mapper extends BaseMapper<${humpTableName!?cap_first}MB> {
+public interface ${humpTableName!?cap_first}Mapper extends BaseMapper<${humpTableName!?cap_first}> {
 
 }

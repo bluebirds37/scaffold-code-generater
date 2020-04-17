@@ -41,7 +41,11 @@ top:
 #      - QueryReq
 #      - ServiceImpl
     table-names:
+      - t_department
       - t_log_history
+      - t_permission
+      - t_user
+      - t_role
     # 需要生成的模板
     template-names:
       - Controller
