@@ -1,15 +1,18 @@
 server:
   port: 30000
 spring:
+  profiles:
+    active: vue
   # 禁用spring mvc freemarker扫描
   freemarker:
     check-template-location: false
   datasource:
-    url: jdbc:mysql://192.168.176.128:3306/ypd?serverTimezone=Hongkong&useSSL=false&useUnicode=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true
+    url: jdbc:mysql://www.jihengcc.cn:17336/ypd-test?serverTimezone=Hongkong&useSSL=false&useUnicode=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true
     hikari:
       username: root
-      password: root
+      password: 1q2w3e4r
     driver-class-name: com.mysql.cj.jdbc.Driver
+
 mybatis-plus:
   mapper-locations: classpath:/mapper/**
 
@@ -23,46 +26,9 @@ top:
   bluebirds37:
     # 生成目标文件夹
     result-path: C:\migao\CodeSpaces\scaffold-code-generator\result\
-    # 需要生成的表格
-#    table-names:
-#      - t_log_history
-#    # 需要生成的模板
-#    template-names:
-#      - Controller
-#      - Mapper
-#      - MapperXml
-#      - MB
-#      - PageQueryReq
-#      - Repository
-#      - InsertReq
-#      - UpdateReq
-#      - QueryRes
-#      - Service
-#      - QueryReq
-#      - ServiceImpl
-    table-names:
-      - t_department
-      - t_log_history
-      - t_permission
-      - t_user
-      - t_role
-    # 需要生成的模板
-    template-names:
-      - Controller
-      - Mapper
-      - MapperXml
-      - PageQueryReq
-      - InsertReq
-      - UpdateReq
-      - QueryRes
-      - Service
-      - QueryReq
-      - ServiceImpl
     # 包名称
     package-name: cn.jiheng.ypd
     # 表格前缀，没有就不填写
     table-prefix: t_
-    # 生成模板类型
-    template-type: mybatis-plus
 
 

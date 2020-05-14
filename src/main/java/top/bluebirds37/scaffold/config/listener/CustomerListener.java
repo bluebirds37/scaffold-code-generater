@@ -61,30 +61,84 @@ public class CustomerListener implements ApplicationListener<ContextRefreshedEve
         //操作freemarker
         tableInfos.forEach(
                 table -> {
-                    systemProperties.getTemplateNames().forEach(
-                            templateName -> {
-                                String suffix = ".java";
-                                String resultName = templateName;
-                                if (templateName.contains("Xml")){
-                                    suffix = ".xml";
-                                    resultName  = resultName.replaceAll("Xml","");
+                    if ("vue".equals(systemProperties.getTemplateType())) {
+                        systemProperties.getTemplateNames().forEach(
+                                templateName -> {
+                                    switch (templateName) {
+                                        case "index": {
+                                            String suffix = ".vue";
+                                            String resultName = "index";
+                                            TemplateHandler.getTemplate(
+                                                    systemProperties.getTemplateType(),
+                                                    templateName,
+                                                    StringUtils.join(
+                                                            systemProperties.getResultPath(),
+                                                            table.getHumpTableName(),
+                                                            File.separator,
+                                                            resultName,
+                                                            suffix
+                                                    ),
+                                                    JSONObject.parseObject(JSON.toJSONString(table))
+                                            );
+                                        }
+                                        break;
+                                        case "js": {
+                                            String suffix = ".js";
+                                            TemplateHandler.getTemplate(
+                                                    systemProperties.getTemplateType(),
+                                                    templateName,
+                                                    StringUtils.join(
+                                                            systemProperties.getResultPath(),
+                                                            table.getHumpTableName(),
+                                                            suffix
+                                                    ),
+                                                    JSONObject.parseObject(JSON.toJSONString(table))
+                                            );
+                                        }
+                                        break;
+                                        default:
+                                            break;
+                                    }
                                 }
-                                TemplateHandler.getTemplate(
-                                        systemProperties.getTemplateType(),
-                                        templateName,
-                                        StringUtils.join(
-                                                systemProperties.getResultPath(),
-                                                //templateName,
-                                                //File.separator,
-                                                table.getClassName(),
-                                                resultName,
-                                                suffix
-                                        ),
-                                        JSONObject.parseObject(JSON.toJSONString(table))
-                                );
-                            }
-                    );
+                        );
+                    } else {
+                        systemProperties.getTemplateNames().forEach(
+                                templateName -> {
+                                    String suffix = ".java";
+                                    String resultName = templateName;
+                                    if (templateName.contains("Xml")) {
+                                        suffix = ".xml";
+                                        resultName = resultName.replaceAll("Xml", "");
+                                    }
+                                    TemplateHandler.getTemplate(
+                                            systemProperties.getTemplateType(),
+                                            templateName,
+                                            StringUtils.join(
+                                                    systemProperties.getResultPath(),
+                                                    //templateName,
+                                                    //File.separator,
+                                                    table.getClassName(),
+                                                    resultName,
+                                                    suffix
+                                            ),
+                                            JSONObject.parseObject(JSON.toJSONString(table))
+                                    );
+                                }
+                        );
+                    }
+
                 }
         );
+        StringBuilder stringBuilder = new StringBuilder();
+        for (TableInfo tableInfo : tableInfos) {
+            String string = "{\n" +
+                    "        path: '" + tableInfo.getHumpTableName() + "',\n" +
+                    "        name: '" + tableInfo.getClassName() + "',\n" +
+                    "        component: () => import('@/views/" + tableInfo.getHumpTableName() + "/index'),\n" +
+                    "        meta: { title: '"+tableInfo.getTableComment()+"', icon: '" + tableInfo.getHumpTableName() + "' }\n" +
+                    "      },";
+            stringBuilder.append(string);
+        }
+        System.out.println(stringBuilder);
     }
 }

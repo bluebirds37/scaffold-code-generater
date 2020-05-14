@@ -1,0 +1,62 @@
+top:
+  bluebirds37:
+
+    # 需要生成的表格
+    #    table-names:
+    #      - t_log_history
+    #    # 需要生成的模板
+    #    template-names:
+    #      - Controller
+    #      - Mapper
+    #      - MapperXml
+    #      - MB
+    #      - PageQueryReq
+    #      - Repository
+    #      - InsertReq
+    #      - UpdateReq
+    #      - QueryRes
+    #      - Service
+    #      - QueryReq
+    #      - ServiceImpl
+    table-names:
+      - t_approval
+      - t_collect
+      - t_collect_file
+      - t_collect_path
+      - t_common_facility
+      - t_courts
+      - t_defect
+      - t_defect_file
+      - t_defect_remove
+      - t_defect_remove_file
+      - t_department
+      - t_dictionary
+      - t_facility
+      - t_facility_common
+      - t_facility_name_history
+      - t_facility_type
+      - t_file_info
+      - t_functional
+      - t_graph
+      - t_log_history
+      - t_meter
+      - t_meter_box
+      - t_permission
+      - t_role
+      - t_telegraph_pole
+      - t_transformer
+      - t_user
+      - t_user_courts
+      - t_versions
+    # 需要生成的模板
+    template-names:
+      - Controller
+      - Mapper
+      - MapperXml
+      - PageQueryReq
+      - InsertReq
+      - UpdateReq
+      - QueryRes
+      - Service
+      - QueryReq
+      - ServiceImpl
