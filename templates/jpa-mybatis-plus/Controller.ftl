@@ -76,4 +76,11 @@ public class ${humpTableName!?cap_first}Controller {
         return ${humpTableName!}Service.query(${humpTableName!}QueryReq);
     }
 
+    @ApiOperation("查")
+    @PostMapping(value = "/selectById")
+    public ResponseBean<${humpTableName!?cap_first}QueryRes> selectById(
+    @RequestParam Long id
+    ) {
+        return ${humpTableName!}Service.selectById(id);
+    }
 }

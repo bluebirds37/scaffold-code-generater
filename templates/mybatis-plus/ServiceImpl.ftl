@@ -164,4 +164,13 @@ public class ${className!}ServiceImpl implements ${className!}Service {
                 ).collect(Collectors.toList())
         );
     }
+
+    @Override
+    public ResponseBean<UserQueryRes> selectById(Long id) {
+        ${className!}  ${humpTableName!} =  ${humpTableName!}Mapper.selectById(id);
+        if ( ${humpTableName!}==null){
+         return ResponseBuilder.fail("记录不存在");
+        }
+        return ResponseBuilder.ok(EntityUtils.copyProperties( ${humpTableName!}, ${className!} QueryRes.class));
+    }
 }

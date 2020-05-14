@@ -59,4 +59,13 @@ public interface ${humpTableName!?cap_first}Service {
      * @return ?
      */
     ResponseBean<List<${humpTableName!?cap_first}QueryRes>> query(${humpTableName!?cap_first}QueryReq ${humpTableName!}QueryReq);
+
+    /**
+    * 查
+    *
+    * @param id
+    * @return ?
+    */
+    ResponseBean<{humpTableName!?cap_first}QueryRes> selectById(Long id);
+
 }
