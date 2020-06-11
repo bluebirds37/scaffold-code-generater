@@ -7,10 +7,10 @@ spring:
   freemarker:
     check-template-location: false
   datasource:
-    url: jdbc:mysql://www.jihengcc.cn:17336/ypd-test?serverTimezone=Hongkong&useSSL=false&useUnicode=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true
+    url: jdbc:mysql://localhost:3306/ypd-field?serverTimezone=Hongkong&useSSL=false&useUnicode=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true
     hikari:
       username: root
-      password: 1q2w3e4r
+      password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis-plus:

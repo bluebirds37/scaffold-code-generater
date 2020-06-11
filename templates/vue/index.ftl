@@ -7,8 +7,9 @@
                         <el-input v-model="pageQueryReq.name" placeholder="请输入关键字"></el-input>
                     </div>
                 </el-col>
-                <el-col :span="2" :offset="0">
+                <el-col :span="4" :offset="0">
                     <div>
+                        <el-button type="info" plain @click="resetQueryReq()">重置</el-button>
                         <el-button type="info" plain @click="fetchPageList()">搜索</el-button>
                     </div>
                 </el-col>
@@ -41,7 +42,7 @@
                         <el-button type="success" plain @click="exportExcel()">导出</el-button>
                     </div>
                 </el-col>
-                <el-col :span="5" :offset="0">
+                <el-col :span="2" :offset="0">
                     <div></div>
                 </el-col>
             </el-row>
@@ -58,9 +59,9 @@
                     @selection-change="handleSelectionChange"
             >
                 >
-                <el-table-column type="selection" width="55"></el-table-column>
+                <el-table-column align="center" type="selection" width="55"></el-table-column>
                 <el-table-column fixed align="center" label="序号" width="95">
-                    <template slot-scope="scope">{{ scope.$index }}</template>
+                    <template slot-scope="scope">{{ scope.$index +1 }}</template>
                 </el-table-column>
 
                 <#list columnInfoList as columnInfo>
@@ -287,13 +288,26 @@
                 this.selectedList.forEach(item => {
                     ids.push(item.id);
                 });
-                deleteBatch(ids).then(response => {
-                    this.$message({
-                        type: "success",
-                        message: "删除成功!"
+                this.$confirm("此操作将永久删除:是否继续?", "提示", {
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                    type: "warning"
+                })
+                    .then(() => {
+                        deleteBatch(ids).then(response => {
+                            this.$message({
+                                type: "success",
+                                message: "删除成功!"
+                            });
+                            this.fetchPageList();
+                        });
+                    })
+                    .catch(() => {
+                        this.$message({
+                            type: "info",
+                            message: "已取消删除"
+                        });
                     });
-                    this.fetchPageList();
-                });
             },
             //修改
             update() {
@@ -349,6 +363,14 @@
                 exportExcel().then(response => {
                     this.downloadFromUrl(response.data);
                 });
+            },
+            resetQueryReq() {
+                this.pageQueryReq = {
+                    page: 1,
+                    size: 10,
+                    name: ""
+                };
+                this.fetchPageList();
             },
             //勾选
             handleSelectionChange(val) {
