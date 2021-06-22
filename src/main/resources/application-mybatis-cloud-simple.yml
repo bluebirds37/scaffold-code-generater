@@ -1,0 +1,11 @@
+top:
+  bluebirds37:
+    table-names:
+      - users
+    # 需要生成的模板
+    template-names:
+      - Controller
+      - Mapper
+      - MapperXml
+      - Service
+      - ServiceImpl
