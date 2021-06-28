@@ -2,12 +2,12 @@ server:
   port: 30000
 spring:
   profiles:
-    active: vue
+    active: mybatis-cloud-simple
   # 禁用spring mvc freemarker扫描
   freemarker:
     check-template-location: false
   datasource:
-    url: jdbc:mysql://localhost:3306/ypd-field?serverTimezone=Hongkong&useSSL=false&useUnicode=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true
+    url: jdbc:mysql://localhost:3306/cloud_admin_system?serverTimezone=Hongkong&useSSL=false&useUnicode=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true
     hikari:
       username: root
       password: root
@@ -25,10 +25,10 @@ logging:
 top:
   bluebirds37:
     # 生成目标文件夹
-    result-path: C:\migao\CodeSpaces\scaffold-code-generator\result\
+    result-path: /Users/blue/CodeSpaces/MySpaces/scaffold-code-generater/result/
     # 包名称
-    package-name: cn.jiheng.ypd
+    package-name: com.terreacon.kodo
     # 表格前缀，没有就不填写
-    table-prefix: t_
+    table-prefix:
 
 

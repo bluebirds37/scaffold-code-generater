@@ -35,7 +35,7 @@ public class CustomerListener implements ApplicationListener<ContextRefreshedEve
         List<TableInfo> tableInfos = dataMapper.listTables();
         if (systemProperties.getTableNames().size() > 0) {
             tableInfos = tableInfos.stream().filter(
-                    i -> systemProperties.getTableNames().indexOf(i.getTableName()) != -1
+                    i -> systemProperties.getTableNames().contains(i.getTableName())
             ).collect(Collectors.toList());
         }
         tableInfos.forEach(

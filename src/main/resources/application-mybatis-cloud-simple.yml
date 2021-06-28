@@ -9,3 +9,4 @@ top:
       - MapperXml
       - Service
       - ServiceImpl
+    template-type: mybatis-plus-cloud-simple

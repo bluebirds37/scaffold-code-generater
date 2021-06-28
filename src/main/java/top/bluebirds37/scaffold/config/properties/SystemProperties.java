@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,13 +27,13 @@ public class SystemProperties {
     /**
      * 文件下载前缀
      */
-    private List<String> tableNames;
+    private List<String> tableNames = new ArrayList<>();
 
     private String templateType;
 
     private String resultPath;
 
-    private List<String> templateNames;
+    private List<String> templateNames = new ArrayList<>();
 
     private String packageName;
 
